@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :food_truck_fun, FoodTruckFun.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASSWORD"),
   hostname: "localhost",
   database: "food_truck_fun_dev",
   stacktrace: true,
