@@ -6,8 +6,8 @@ import Config
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :food_truck_fun, FoodTruckFun.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASSWORD"),
   hostname: "localhost",
   database: "food_truck_fun_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
