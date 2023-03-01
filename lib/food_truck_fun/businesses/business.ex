@@ -4,6 +4,7 @@ defmodule FoodTruckFun.Businesses.Business do
 
   schema "businesses" do
     field :name, :string
+    has_many :locations, FoodTruckFun.Locations.Location
 
     timestamps()
   end

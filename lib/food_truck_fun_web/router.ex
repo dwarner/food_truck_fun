@@ -9,6 +9,7 @@ defmodule FoodTruckFunWeb.Router do
     pipe_through :api
 
     resources "/businesses", BusinessController, except: [:new, :edit]
+    resources "/locations", LocationController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
