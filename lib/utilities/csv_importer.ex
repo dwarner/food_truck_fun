@@ -9,6 +9,10 @@ defmodule FoodTruckFun.Utilities.CsvImporter do
   """
 
   require CSV
+  require Logger
+
+  alias FoodTruckFun.Businesses
+
   @filename "../../data/Mobile_Food_Facility_Permit.csv"
 
   @doc """
@@ -23,6 +27,7 @@ defmodule FoodTruckFun.Utilities.CsvImporter do
   def csv_import do
     csv_decoder()
     |> sanitize_records()
+    |> import_into_db()
   end
 
   @doc """
@@ -43,7 +48,7 @@ defmodule FoodTruckFun.Utilities.CsvImporter do
   end
 
   @doc """
-  Returns a list of sanitized records:
+  Takes a list of records and returns a list of sanitized records:
     * Status => "APPROVED"
 
   ## Examples
@@ -55,6 +60,35 @@ defmodule FoodTruckFun.Utilities.CsvImporter do
   def sanitize_records(records) do
     records
     |> only_approved()
+  end
+
+  @doc """
+  Imports a list of records into the dabase.
+  New "Applicants" are added to the `businesses` table.
+
+  ## Examples
+
+    iex> FoodTruckFun.Utilities.CsvImporter.import_into_db(records)
+    Imported 0 businesses from csv.
+    There were 148 errors (see logs).
+    :ok
+  """
+  def import_into_db(records) do
+    import_results =
+      for record <- records do
+        {:ok, %{"Applicant" => name}} = record
+
+        case Businesses.create_business(%{name: name}) do
+          {:ok, business} ->
+            Logger.info("Business \"#{business.name}\" has been added.")
+            :ok
+          {:error, changeset} ->
+            Logger.error("Error inserting business: #{inspect(changeset)}")
+            :error
+        end
+      end |> Enum.frequencies()
+
+    Logger.info("Imported #{import_results[:ok] || 0} businesses from csv.\nThere were #{import_results[:error] || 0} errors (see logs).")
   end
 
   defp only_approved(records) do

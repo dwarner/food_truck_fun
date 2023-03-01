@@ -1,6 +1,11 @@
 defmodule Utilities.CsvImporterTest do
   use ExUnit.Case
 
+  setup do
+    # Explicitly get a connection before each test
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(FoodTruckFun.Repo)
+  end
+
   alias FoodTruckFun.Utilities.CsvImporter
 
   describe "csv_importer" do
@@ -65,6 +70,10 @@ defmodule Utilities.CsvImporterTest do
 
     test "sanitize_records/1 returns only 'APPROVED' permits" do
       assert CsvImporter.sanitize_records(@records) |> length == 1
+    end
+
+    test "import_into_db/1 only imports businsesses not already in the db" do
+     assert :ok == CsvImporter.import_into_db(@records)
     end
   end
 end
