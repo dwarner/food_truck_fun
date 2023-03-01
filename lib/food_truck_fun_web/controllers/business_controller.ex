@@ -6,8 +6,14 @@ defmodule FoodTruckFunWeb.BusinessController do
 
   action_fallback FoodTruckFunWeb.FallbackController
 
-  def index(conn, _params) do
-    businesses = Businesses.list_businesses()
+  def index(conn, params) do
+    businesses = case params do
+      %{"name" => name} = _params ->
+        Businesses.list_businesses_by_name(name)
+      _ ->
+        Businesses.list_businesses()
+    end
+
     render(conn, :index, businesses: businesses)
   end
 

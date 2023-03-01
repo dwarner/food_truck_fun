@@ -15,6 +15,13 @@ defmodule FoodTruckFun.BusinessesTest do
       assert Businesses.list_businesses() == [business]
     end
 
+    test "list_businesses_by_name/1 returns all business iLIKE name parameter" do
+      _businesses = [business_fixture(%{:name => "Food Truck 1"}),
+                     business_fixture(%{:name => "Food Truck 2"}),
+                     business_fixture(%{:name => "Food Cart"})]
+      assert Businesses.list_businesses_by_name("truck") |> length == 2
+    end
+
     test "get_business!/1 returns the business with given id" do
       business = business_fixture()
       assert Businesses.get_business!(business.id) == business

@@ -22,6 +22,20 @@ defmodule FoodTruckFun.Businesses do
   end
 
   @doc """
+  Takes a business name and returns a list of matching businesses.
+
+  ## Examples
+
+    iex> list_businesses_by_name(name)
+    [%Business{}, ...]
+
+  """
+  def list_businesses_by_name(name) do
+    like = "%#{name}%"
+    Repo.all(from b in Business, where: ilike(b.name, ^like))
+  end
+
+  @doc """
   Gets a single business.
 
   Raises `Ecto.NoResultsError` if the Business does not exist.

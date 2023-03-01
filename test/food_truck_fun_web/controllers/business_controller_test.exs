@@ -22,6 +22,15 @@ defmodule FoodTruckFunWeb.BusinessControllerTest do
       conn = get(conn, ~p"/api/businesses")
       assert json_response(conn, 200)["data"] == []
     end
+
+    test "index wiih name parameter", %{conn: conn} do
+      conn = conn
+            |> post(~p"/api/businesses", business: %{name: "Food Truck"})
+            |> post(~p"/api/businesses", business: %{name: "Food Cart"})
+            |> get(~p"/api/businesses?name=truck")
+      assert json_response(conn, 200)["data"] |> length == 1
+      assert json_response(conn, 200)["data"] |> List.first |> Map.get("name") == "Food Truck"
+    end
   end
 
   describe "create business" do
