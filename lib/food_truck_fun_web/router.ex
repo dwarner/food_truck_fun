@@ -7,6 +7,8 @@ defmodule FoodTruckFunWeb.Router do
 
   scope "/api", FoodTruckFunWeb do
     pipe_through :api
+
+    resources "/businesses", BusinessController, except: [:new, :edit]
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
