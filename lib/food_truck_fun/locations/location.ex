@@ -19,7 +19,7 @@ defmodule FoodTruckFun.Locations.Location do
   @doc false
   def changeset(location, attrs) do
     location
-    |> cast(attrs, [:external_location_id, :expiration_date, :facility_type, :food_items, :latitude, :longitude, :location_description, :schedule])
+    |> cast(attrs, [:external_location_id, :expiration_date, :facility_type, :food_items, :latitude, :longitude, :location_description, :schedule, :business_id])
     |> validate_required([:external_location_id, :expiration_date, :facility_type, :food_items, :latitude, :longitude, :location_description, :schedule])
     |> unique_constraint(:unique_location_external_location_id, name: :external_location_id_index)
   end
