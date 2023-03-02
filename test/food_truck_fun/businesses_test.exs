@@ -27,6 +27,11 @@ defmodule FoodTruckFun.BusinessesTest do
       assert Businesses.get_business!(business.id) == business
     end
 
+    test "get_business_by_name!/1 returns the business with given name" do
+      business = business_fixture(%{:name => "La Jefa"})
+      assert Businesses.get_business_by_name!("La Jefa") == business
+    end
+
     test "create_business/1 with valid data creates a business" do
       valid_attrs = %{name: "some name"}
 

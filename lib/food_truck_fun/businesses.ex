@@ -52,6 +52,25 @@ defmodule FoodTruckFun.Businesses do
   def get_business!(id), do: Repo.get!(Business, id)
 
   @doc """
+  Gets a single business by business name.
+
+  Raises `Ecto.NoResultsError` if the Business does not exist.
+
+  ## Examples
+
+      iex> get_business!("La Jefa")
+      %Business{}
+
+      iex> get_business!("Invisible Food Truck")
+      ** (Ecto.NoResultsError)
+  """
+
+  def get_business_by_name!(name) do
+    like = "%#{name}%"
+    Repo.one!(from b in Business, where: ilike(b.name, ^like))
+  end
+
+  @doc """
   Creates a business.
 
   ## Examples
