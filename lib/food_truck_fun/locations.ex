@@ -38,6 +38,24 @@ defmodule FoodTruckFun.Locations do
   def get_location!(id), do: Repo.get!(Location, id)
 
   @doc """
+  Gets a single location by `external_location_id`.
+
+  Raises `Ecto.NoResultsError` if the Location does not exist.
+
+  ## Examples
+
+      iex> get_location_by_external_location_id!(123)
+      %Location{}
+
+      iex> get_location_by_external_location_id!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_location_by_external_location_id!(external_location_id) do
+    Repo.one!(from l in Location, where: l.external_location_id == ^external_location_id)
+  end
+
+  @doc """
   Creates a location.
 
   ## Examples

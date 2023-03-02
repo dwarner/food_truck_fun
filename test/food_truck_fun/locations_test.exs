@@ -20,6 +20,11 @@ defmodule FoodTruckFun.LocationsTest do
       assert Locations.get_location!(location.id) == location
     end
 
+    test "get_location_by_external_location_id!!/1 returns the location with given external_location_id" do
+      location = location_fixture(%{:external_location_id => 123})
+      assert Locations.get_location_by_external_location_id!(123) == location
+    end
+
     test "create_location/1 with valid data creates a location" do
       valid_attrs = %{expiration_date: ~D[2023-02-28], external_location_id: 42, facility_type: "some facility_type", food_items: "some food_items", latitude: "some latitude", location_description: "some location_description", longitude: "some longitude", schedule: "some schedule"}
 
