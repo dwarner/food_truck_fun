@@ -9,7 +9,9 @@ defmodule FoodTruckFun.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [coveralls: :test]
     ]
   end
 
@@ -47,7 +49,8 @@ defmodule FoodTruckFun.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:csv, "~> 3.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:ecto_dbg, "~> 0.1.0", only: [:dev, :test]}
+      {:ecto_dbg, "~> 0.1.0", only: [:dev, :test]},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
