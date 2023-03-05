@@ -18,7 +18,7 @@ defmodule FoodTruckFun.Locations do
 
   """
   def list_locations do
-    Repo.all(Location)
+    Location |> not_expired |> Repo.all()
   end
 
   @doc """
@@ -118,5 +118,10 @@ defmodule FoodTruckFun.Locations do
   """
   def change_location(%Location{} = location, attrs \\ %{}) do
     Location.changeset(location, attrs)
+  end
+
+  defp not_expired(location) do
+    now = NaiveDateTime.local_now()
+    where(location, [l], l.expiration_date >= ^now)
   end
 end

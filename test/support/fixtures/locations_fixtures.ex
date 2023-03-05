@@ -8,10 +8,12 @@ defmodule FoodTruckFun.LocationsFixtures do
   Generate a location.
   """
   def location_fixture(attrs \\ %{}) do
+    today = NaiveDateTime.local_now() |> NaiveDateTime.to_date()
+
     {:ok, location} =
       attrs
       |> Enum.into(%{
-        expiration_date: ~D[2023-02-28],
+        expiration_date: today,
         external_location_id: 42,
         facility_type: "some facility_type",
         food_items: "some food_items",
@@ -23,5 +25,15 @@ defmodule FoodTruckFun.LocationsFixtures do
       |> FoodTruckFun.Locations.create_location()
 
     location
+  end
+
+  def location_fixture_expired(attrs \\ %{}) do
+  yesterday = NaiveDateTime.local_now()
+              |> NaiveDateTime.add(-1, :day)
+              |> NaiveDateTime.to_date()
+
+    attrs |> Enum.into(%{
+      expiration_date: yesterday
+    }) |> location_fixture()
   end
 end

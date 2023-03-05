@@ -10,8 +10,10 @@ defmodule FoodTruckFun.LocationsTest do
 
     @invalid_attrs %{expiration_date: nil, external_location_id: nil, facility_type: nil, food_items: nil, latitude: nil, location_description: nil, longitude: nil, schedule: nil}
 
-    test "list_locations/0 returns all locations" do
+    test "list_locations/0 returns all locations with permits not expired" do
       location = location_fixture()
+      _location_expired = location_fixture_expired()
+
       assert Locations.list_locations() == [location]
     end
 
