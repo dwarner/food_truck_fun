@@ -1,4 +1,8 @@
 defmodule FoodTruckFunWeb.ChangesetJSON do
+  @moduledoc """
+  ChangesetJSON errors.
+  """
+
   @doc """
   Renders changeset errors.
   """

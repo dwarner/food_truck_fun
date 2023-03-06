@@ -1,4 +1,7 @@
 defmodule FoodTruckFunWeb.LocationJSON do
+  @moduledoc """
+  JSON structure for locations.
+  """
   alias FoodTruckFun.Locations.Location
 
   @doc """

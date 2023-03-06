@@ -1,4 +1,7 @@
 defmodule FoodTruckFun.Businesses.Business do
+  @moduledoc """
+  Schema for businesses.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

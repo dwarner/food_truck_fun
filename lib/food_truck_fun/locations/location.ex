@@ -1,4 +1,7 @@
 defmodule FoodTruckFun.Locations.Location do
+  @moduledoc """
+  Schema for locations.
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

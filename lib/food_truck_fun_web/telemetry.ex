@@ -1,4 +1,9 @@
 defmodule FoodTruckFunWeb.Telemetry do
+  @moduledoc """
+  Telemetry supervisor
+
+  https://hexdocs.pm/phoenix/telemetry.html
+  """
   use Supervisor
   import Telemetry.Metrics
 

@@ -1,4 +1,7 @@
 defmodule FoodTruckFunWeb.BusinessJSON do
+  @moduledoc """
+  JSON structure for businesses.
+  """
   alias FoodTruckFun.Businesses.Business
 
   @doc """

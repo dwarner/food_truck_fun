@@ -1,4 +1,8 @@
 defmodule FoodTruckFunWeb.ErrorJSON do
+  @moduledoc """
+  Renders JSON error codes.
+  """
+
   # If you want to customize a particular status code,
   # you may add your own clauses, such as:
   #
